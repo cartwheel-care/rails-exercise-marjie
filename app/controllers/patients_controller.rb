@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  include FlashHelper
+
   def index
     @patients = Patient.all.order(:first_name, :last_name)
   end
@@ -6,9 +8,10 @@ class PatientsController < ApplicationController
   def sync
     @patient = Patient.find(params[:id])
 
-    PatientSyncService.new(@patient).sync
+    sync_result = PatientSyncService.new(@patient).sync
 
-    flash[:info] = "Synced patient '#{@patient.first_name} #{@patient.last_name}' with Sicklie"
+    set_sicklie_sync_flash(sync_result: sync_result, patient: @patient)
+
     redirect_to action: :index
   end
 end
