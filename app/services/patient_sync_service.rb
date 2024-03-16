@@ -26,5 +26,7 @@ class PatientSyncService
         @patient.update!(sicklie_updated_at: Time.current)
       end      
     end
+
+    result
   end
 end
