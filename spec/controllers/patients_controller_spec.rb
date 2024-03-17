@@ -15,7 +15,7 @@ RSpec.describe PatientsController, type: :controller do
     before { allow(PatientSyncService).to receive(:new).and_call_original }
 
     it "calls the sync service and redirects" do
-      post :sync, params: { id: patient.id }
+      put :sync, params: { id: patient.id }
 
       expect(PatientSyncService).to have_received(:new)
       expect(response.status).to eq 302

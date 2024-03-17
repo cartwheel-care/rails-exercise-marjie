@@ -12,6 +12,10 @@ class PatientsController < ApplicationController
 
     set_sicklie_sync_flash(sync_result: sync_result, patient: @patient)
 
-    redirect_to action: :index
+    if params[:redirect_path].present?
+      redirect_to params[:redirect_path]
+    else
+      redirect_to action: :index
+    end
   end
 end

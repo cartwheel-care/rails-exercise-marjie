@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :contacts, only: [:index] do
+    member do
+      patch :create_patient
+    end
+  end
+
   # Defines the root path route ("/")
   root "home#index"
 end
